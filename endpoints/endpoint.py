@@ -28,3 +28,27 @@ class Endpoint:
     @allure.step('Checking if response status is 404')
     def is_response_status_404(self):
         assert self.result.status_code == 404, 'Wrong status code'
+
+    @allure.step('Checking if response status is 403')
+    def is_response_status_403(self):
+        assert self.result.status_code == 403, 'Wrong status code'
+
+    @allure.step('Checking if body text is correct')
+    def is_body_text_correct(self, body=None):
+        body = body if body else self.body
+        assert self.result.json()['text'] == body['text']
+
+    @allure.step('Checking if body url is correct')
+    def is_body_url_correct(self, body=None):
+        body = body if body else self.body
+        assert self.result.json()['url'] == body['url']
+
+    @allure.step('Checking if body tags is correct')
+    def is_body_tags_correct(self, body=None):
+        body = body if body else self.body
+        assert self.result.json()['tags'] == body['tags']
+
+    @allure.step('Checking if body info is correct')
+    def is_body_info_correct(self, body=None):
+        body = body if body else self.body
+        assert self.result.json()['info'] == body['info']
